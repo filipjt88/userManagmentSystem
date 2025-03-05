@@ -1,27 +1,25 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector("#registerFrom").addEventListener("submit", function (e) {
-        e.preventDefault();
+    const registerForm = document.getElementById("registerForm");
 
-        let name = document.querySelector("#name").value;
-        let email = document.querySelector("#email").value;
-        let password = document.querySelector("#password").value;
+    if (registerForm) {
+        registerForm.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-        fetch("http://localhost/userManagmentSystem/register.html", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: `name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
-        })
-            .then(response => response.json())
-            .then(data => {
-                document.querySelector("#message").textContent = data.message;
-                if (data.success) {
-                    document.querySelector("#message").style.color = "green";
-                } else {
-                    document.querySelector("#message").style.color = "red";
-                }
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            fetch("localhost/userManagementSystem/register.html", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, password })
             })
-            .catch(error => console.error("Error:", error));
-    });
-})
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("message").textContent = data.message;
+                    document.getElementById("message").style.color = data.success ? "green" : "red";
+                })
+                .catch(error => console.error("Greška:", error));
+        });
+    }
+});
