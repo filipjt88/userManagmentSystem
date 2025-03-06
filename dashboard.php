@@ -1,4 +1,8 @@
 <?php
+require_once 'core/config.php'; // Ako je connection.php u folderu "core"
+require_once 'core/connection.php'; // Ako je connection.php u folderu "core"
+
+
 session_start(); // Ovdje pozivamo session_start()
 // Provera da li je korisnik ulogovan
 if (!isset($_SESSION['user_id'])) {
@@ -35,6 +39,9 @@ if (isset($_GET['edit_id'])) {
     $stmt->bindParam(':id', $edit_id);
     $stmt->execute();
     $user = $stmt->fetch();
+}
+if (!isset($pdo)) {
+    die("Greška: Konekcija sa bazom nije uspostavljena.");
 }
 
 // Prikazivanje liste korisnika

@@ -7,4 +7,12 @@ try {
 } catch (PDOException $e) {
     die('Connection failed: ' . $e->getMessage());
 }
+
+if (isset($pdo)) {
+    echo "✅ Konekcija sa bazom je uspešno uspostavljena.";
+} else {
+    echo "❌ Greška: Konekcija sa bazom nije uspostavljena.";
+}
+
+
 ?>
