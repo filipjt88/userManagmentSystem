@@ -1,3 +1,10 @@
+<?php
+// Ako je korisnik ulogovan, prikazujemo dugme za logout
+if(isset($_SESSION['user_id'])) {
+    echo '<a href="logout.php" class="btn btn-danger">Logout</a>';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

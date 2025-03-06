@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(isset($_SESSION['user_id'])) {
+    header('Location: dashboard.php'); // ili neka druga stranica
+    exit();
+}
+?>
+
 <?php include '../includes/header.php'; ?>
 <div class="container">
     <h2>Register</h2>

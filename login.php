@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Prijavljivanje korisnika
             $_SESSION['user_id'] = $user['ID'];
             $_SESSION['user_email'] = $user['email'];
-            header('Location: index.view.php');
+            header('Location:dashboard.php');
             exit();
         } else {
             echo "Invalid email or password.";
