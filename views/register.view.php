@@ -1,7 +1,7 @@
 <?php include '../includes/header.php'; ?>
 <div class="container">
     <h2>Register</h2>
-    <form action="register.php" method="POST">
+    <form action="../register.php" method="POST">
         <input type="text" name="firstname" class="form-control" placeholder="First Name" required><br>
         <input type="text" name="lastname" class="form-control" placeholder="Last Name" required><br>
         <input type="email" name="email" class="form-control" placeholder="Email" required><br>

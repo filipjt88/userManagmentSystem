@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Kreiranje korisnika
         createUser($firstname, $lastname, $email, $password);
-        header('Location: login.view.php');
+        header('Location: views/login.view.php');
         exit();
     }
 }
