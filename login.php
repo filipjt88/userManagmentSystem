@@ -1,28 +1,25 @@
 <?php
-require_once 'core/init.php';
+session_start(); // Pokrećemo sesiju
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Provera podataka za logovanje
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Validacija podataka
-    if (empty($email) || empty($password)) {
-        echo "All fields are required.";
-    } else {
-        // Provera da li korisnik postoji u bazi
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
-        $stmt->execute([$email]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Provera u bazi podataka (koristi PDO)
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    $user = $stmt->fetch();
 
-        if ($user && password_verify($password, $user['password'])) {
-            // Prijavljivanje korisnika
-            $_SESSION['user_id'] = $user['ID'];
-            $_SESSION['user_email'] = $user['email'];
-            header('Location:dashboard.php');
-            exit();
-        } else {
-            echo "Invalid email or password.";
-        }
+    if ($user && password_verify($password, $user['password'])) {
+        // Ako su podaci tačni, postavljamo sesiju
+        $_SESSION['user_id'] = $user['ID'];
+        $_SESSION['user_name'] = $user['firstname']; // ili puno ime
+        header('Location: dashboard.php');
+        exit();
+    } else {
+        echo "Pogrešan email ili lozinka!";
     }
 }
 ?>
