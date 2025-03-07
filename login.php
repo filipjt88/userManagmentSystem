@@ -1,5 +1,9 @@
 <?php
 session_start(); // Pokrećemo sesiju
+$_SESSION['user_id'] = $user['id']; // Čuva ID korisnika u sesiji
+$_SESSION['user_name'] = $user['firstname']; // Čuva ime korisnika
+header("Location: dashboard.php");
+exit;
 
 // Provera podataka za logovanje
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -14,9 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($user && password_verify($password, $user['password'])) {
         // Ako su podaci tačni, postavljamo sesiju
-        $_SESSION['user_id'] = $user['ID'];
+        $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['firstname']; // ili puno ime
-        header('Location: dashboard.php');
+        header('Location: dashboard.view.php');
         exit();
     } else {
         echo "Pogrešan email ili lozinka!";

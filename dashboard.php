@@ -1,21 +1,16 @@
 <?php
-require_once 'core/config.php'; // Ako je connection.php u folderu "core"
-require_once 'core/connection.php'; // Ako je connection.php u folderu "core"
+session_start(); // OBAVEZNO dodati na početku
+require_once 'core/connection.php'; 
 
-
-session_start(); // Ovdje pozivamo session_start()
 // Provera da li je korisnik ulogovan
 if (!isset($_SESSION['user_id'])) {
-    // Ako korisnik nije ulogovan, preusmeri ga na login
-    header('Location: login.view.php');
-    exit();
+    die('Greška: Niste ulogovani!');
 }
 
+// Ako je ulogovan, uzimamo podatke korisnika
+$user_id = $_SESSION['user_id'];
+echo "✅ Ulogovani ste kao korisnik sa ID: " . $user_id;
 
-
-// Prikazivanje podataka o korisniku
-$user_name = $_SESSION['user_name']; // Ime korisnika koje je smešteno u sesiji
-$user_id = $_SESSION['user_id']; // ID korisnika
 
 // Ako je korisnik tražio brisanje
 if (isset($_GET['delete_id'])) {
@@ -27,7 +22,7 @@ if (isset($_GET['delete_id'])) {
     $stmt->execute();
 
     // Preusmeravanje na dashboard nakon brisanja
-    header('Location: dashboard.php');
+    header('Location: dashboard.view.php');
     exit();
 }
 
@@ -48,6 +43,9 @@ if (!isset($pdo)) {
 $stmt = $pdo->prepare("SELECT * FROM users");
 $stmt->execute();
 $users = $stmt->fetchAll();
+if (!isset($_SESSION['user_name'])) {
+    $_SESSION['user_name'] = 'Nepoznat korisnik'; // Postavi default vrednost ako nije postavljen
+}
 
 // Prosleđivanje podataka u prikaz
 include('views/dashboard.view.php'); // Prosleđivanje $users, $user_name, $user_id u dashboard.view.php

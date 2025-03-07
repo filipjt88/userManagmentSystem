@@ -16,13 +16,13 @@
             $users = getUsers();
             foreach ($users as $user) {
                 echo "<tr>
-                    <td>{$user['ID']}</td>
+                    <td>{$user['id']}</td>
                     <td>{$user['firstname']}</td>
                     <td>{$user['lastname']}</td>
                     <td>{$user['email']}</td>
                     <td>
-                        <a href='edit.php?id={$user['ID']}' class='btn btn-warning'>Edit</a>
-                        <a href='delete.php?id={$user['ID']}' class='btn btn-danger'>Delete</a>
+                        <a href='edit.php?id={$user['id']}' class='btn btn-warning'>Edit</a>
+                        <a href='delete.php?id={$user['id']}' class='btn btn-danger'>Delete</a>
                     </td>
                 </tr>";
             }

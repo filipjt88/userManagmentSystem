@@ -41,13 +41,13 @@ if (!isset($_SESSION['user_name'])) {
                 if (isset($users) && !empty($users)) {
                     foreach ($users as $user) { ?>
                         <tr>
-                            <td><?php echo $user['ID']; ?></td>
+                            <td><?php echo $user['id']; ?></td>
                             <td><?php echo $user['firstname']; ?></td>
                             <td><?php echo $user['lastname']; ?></td>
                             <td><?php echo $user['email']; ?></td>
                             <td>
-                                <a href="dashboard.php?edit_id=<?php echo $user['ID']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="dashboard.php?delete_id=<?php echo $user['ID']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                                <a href="dashboard.php?edit_id=<?php echo $user['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="dashboard.php?delete_id=<?php echo $user['id']; ?>" class="btn btn-danger btn-sm">Delete</a>
                             </td>
                         </tr>
                     <?php }

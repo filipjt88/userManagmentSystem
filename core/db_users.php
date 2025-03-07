@@ -3,9 +3,42 @@ require_once 'connection.php';
 
 function createUser($firstname, $lastname, $email, $password) {
     global $pdo;
-    $stmt = $pdo->prepare("INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$firstname, $lastname, $email, password_hash($password, PASSWORD_DEFAULT)]);
+
+    // Provera da li je email već u bazi
+    $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email");
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    $existingUser = $stmt->fetch();
+
+    if ($existingUser) {
+        // Ako postoji korisnik sa istim emailom, vrati grešku
+        echo "Korisnik sa ovim email-om već postoji!";
+        return;
+    }
+
+    // Validacija unosa
+    if (empty($firstname) || empty($lastname) || empty($email) || empty($password)) {
+        echo "Svi podaci moraju biti popunjeni!";
+        return;
+    }
+
+    // Validacija email-a
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Neispravan format email-a!";
+        return;
+    }
+
+    try {
+        // Unos novog korisnika u bazu
+        $stmt = $pdo->prepare("INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$firstname, $lastname, $email, password_hash($password, PASSWORD_DEFAULT)]);
+        echo "Korisnik je uspešno kreiran!";
+    } catch (PDOException $e) {
+        // Obrada greške u slučaju neuspeha
+        echo "Greška pri kreiranju korisnika: " . $e->getMessage();
+    }
 }
+
 
 function getUser($id) {
     global $pdo;
