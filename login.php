@@ -1,11 +1,7 @@
 <?php
 session_start(); // Pokrećemo sesiju
-$_SESSION['user_id'] = $user['id']; // Čuva ID korisnika u sesiji
-$_SESSION['user_name'] = $user['firstname']; // Čuva ime korisnika
-header("Location: dashboard.php");
-exit;
+require_once 'core/connection.php'; // Uveži konekciju sa bazom
 
-// Provera podataka za logovanje
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -14,13 +10,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
     $stmt->bindParam(':email', $email);
     $stmt->execute();
-    $user = $stmt->fetch();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user['password'])) {
         // Ako su podaci tačni, postavljamo sesiju
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['user_name'] = $user['firstname']; // ili puno ime
-        header('Location: dashboard.view.php');
+        $_SESSION['user_id'] = $user['ID'];  // Proveri da li je polje u bazi 'ID' ili 'id'
+        $_SESSION['user_name'] = $user['firstname']; 
+
+        // Preusmeravanje na dashboard
+        header('Location: views/dashboard.view.php');
         exit();
     } else {
         echo "Pogrešan email ili lozinka!";
