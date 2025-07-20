@@ -1,6 +1,6 @@
 <?php
 require_once 'core/connection.php'; 
-session_start(); // OBAVEZNO dodati na početku
+session_start();
 
 Provera da li je konekcija sa bazom uspostavljena
 if (!isset($pdo)) {
