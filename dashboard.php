@@ -53,6 +53,5 @@ if (!isset($_SESSION['user_name'])) {
     $_SESSION['user_name'] = 'Nepoznat korisnik'; // Postavi default vrednost ako nije postavljen
 }
 
-// Učitaj view
 include('views/dashboard.view.php'); // Prosleđivanje $users i $user
 ?>
