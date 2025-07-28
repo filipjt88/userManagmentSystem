@@ -1,3 +1,4 @@
+<!-- Delete user -->
 <?php
 require_once 'core/init.php';
 
