@@ -1,3 +1,4 @@
+<!-- Header -->
 <?php
 // Ako je korisnik ulogovan, prikazujemo dugme za logout
 if(isset($_SESSION['user_id'])) {
