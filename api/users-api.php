@@ -1,3 +1,4 @@
+<!-- API -->
 <?php
 require_once '../core/init.php';
 
