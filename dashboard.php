@@ -2,7 +2,7 @@
 require_once 'core/connection.php'; 
 session_start(); // OBAVEZNO dodati na početku
 
-Provera da li je konekcija sa bazom uspostavljena
+//Provera da li je konekcija sa bazom uspostavljena
 if (!isset($pdo)) {
     die("Greška: Konekcija sa bazom nije uspostavljena.");
 }
