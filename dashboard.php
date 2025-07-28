@@ -1,6 +1,6 @@
 <?php
 require_once 'core/connection.php'; 
-session_start(); // OBAVEZNO dodati na početku
+session_start();
 
 //Provera da li je konekcija sa bazom uspostavljena
 if (!isset($pdo)) {
@@ -53,6 +53,5 @@ if (!isset($_SESSION['user_name'])) {
     $_SESSION['user_name'] = 'Nepoznat korisnik'; // Postavi default vrednost ako nije postavljen
 }
 
-// Učitaj view
 include('views/dashboard.view.php'); // Prosleđivanje $users i $user
 ?>
