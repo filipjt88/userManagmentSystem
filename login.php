@@ -1,3 +1,4 @@
+<!-- Login -->
 <?php
 session_start(); // Pokrećemo sesiju
 require_once 'core/connection.php'; // Uveži konekciju sa bazom
