@@ -1,6 +1,6 @@
+<!-- Reguster -->
 <?php
 require_once 'core/init.php';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];

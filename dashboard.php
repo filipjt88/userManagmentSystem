@@ -1,3 +1,4 @@
+<!-- Dashboard -->
 <?php
 require_once 'core/connection.php'; 
 session_start();
