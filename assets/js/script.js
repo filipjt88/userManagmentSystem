@@ -1,6 +1,6 @@
+// Script js
 document.addEventListener('DOMContentLoaded', () => {
     const registerForm = document.querySelector('form');
-
     registerForm.addEventListener('submit', function (e) {
         const firstname = document.querySelector('input[name="firstname"]');
         const lastname = document.querySelector('input[name="lastname"]');
