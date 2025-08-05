@@ -1,3 +1,4 @@
+<!-- Users DB -->
 <?php
 require_once 'connection.php';
 
